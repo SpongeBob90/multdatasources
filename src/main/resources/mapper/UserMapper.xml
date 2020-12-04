@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.multdatasources.dao.UserMapper">
+    <resultMap id="base_result_map" type="com.example.multdatasources.entity.User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+    </resultMap>
+
+    <sql id="base_sql">
+        id,username
+    </sql>
+
+    <select id="listAll" resultMap="base_result_map">
+        SELECT
+        <include refid="base_sql"/>
+        FROM user
+    </select>
+
+    <insert id="insert" parameterType="com.example.multdatasources.entity.User">
+        INSERT INTO user
+        (id,username)
+        VALUES
+        (#{username},#{password},#{createTime},#{updateTime})
+    </insert>
+</mapper>
